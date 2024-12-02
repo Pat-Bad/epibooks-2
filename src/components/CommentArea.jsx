@@ -3,16 +3,18 @@ import { Card } from "react-bootstrap";
 
 class CommentArea extends Component {
   state = {
-    comments: [],  // Stato per i commenti
+    comments: [], // Stato per i commenti
   };
 
+  
 
   getComments = () => {
-    const { asin } = this.props; 
+    const { asin } = this.props;
 
     fetch(`https://striveschool-api.herokuapp.com/api/comments/${asin}`, {
       headers: {
-       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDQzNmI0MDZiZTAwMTRiN2I3NmMiLCJpYXQiOjE3MzMxNTQwMTUsImV4cCI6MTczNDM2MzYxNX0.OIn3Z7VUA4HhPpkLH_yZ0BWcClcx5Lj_gKNJoWQRo44", 
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDQzNmI0MDZiZTAwMTRiN2I3NmMiLCJpYXQiOjE3MzMxNTQwMTUsImV4cCI6MTczNDM2MzYxNX0.OIn3Z7VUA4HhPpkLH_yZ0BWcClcx5Lj_gKNJoWQRo44",
         "Content-Type": "application/json",
       },
     })
@@ -31,16 +33,15 @@ class CommentArea extends Component {
       });
   };
 
-
   componentDidMount() {
     this.getComments();
   }
 
-  
   componentDidUpdate(prevProps) {
-    if (this.props.asin !== prevProps.asin) {
-      this.getComments();
-    }
+	if (this.props.book && this.props.book.asin !== prevProps.book?.asin) {
+	  this.getComments();
+  }
+  
   }
 
   render() {
@@ -50,7 +51,7 @@ class CommentArea extends Component {
           <div>Nessun commento trovato per questo libro.</div>
         ) : (
           this.state.comments.map((comment) => (
-            <Card.Text key={comment._id}>
+            <Card.Text>
               <strong>{comment.comment}</strong>
               <br />
               Rating: {comment.rate}!
