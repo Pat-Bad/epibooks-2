@@ -3,8 +3,7 @@ import { Component } from "react";
 import { Card } from "react-bootstrap";
 
 
-//devo creare lo spazio in cui scrivere le recensioni da POSTARE nell'API
-//devo fare la post dei commenti
+
 
 class CommentArea extends Component {
 	state = { CommentArea: [] };
