@@ -35,6 +35,14 @@ class CommentArea extends Component {
 			});
 	};
 
+	componentDidUpdate(prevProps){
+		if(this.props.comment !== prevProps.comment) 
+		{
+			this.getComments()
+		}
+
+	}
+
 	componentDidMount() {
 		this.getComments();
 	};
@@ -45,9 +53,9 @@ class CommentArea extends Component {
 				{this.state.CommentArea.map((comm) => {
 					return (
 						<Card.Text>
-								{comm.comment}
+								{this.state.comm.comment}
 								<br />
-								{comm.rate}!
+								{this.state.comm.rate}!
                                 </Card.Text>
 					);
 				})}
